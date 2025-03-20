@@ -2,7 +2,7 @@ import os
 import sys
 import signal
 import readline
-from rkllm import model
+from rkllm import rkmodel
 from model_utils import download_tokenizer, download_model
 
 def print_help():
@@ -36,7 +36,7 @@ def model_run(model_name):
         print("\nIncorrect model filename.", flush=True)
         return
 
-    rkllm_model = model(LIB_PATH, MODELS_PATH, model_name)
+    rkllm_model = rkmodel(LIB_PATH, MODELS_PATH, model_name)
 
     def abort_handler(sig, frame):
         rkllm_model.set_abort()
@@ -104,6 +104,6 @@ def model_run(model_name):
 
         signal.signal(signal.SIGINT, default_sigint_handler)
 
-    print("\nExiting...", flush=True)
+    print(flush=True)
 
     rkllm_model.destroy()

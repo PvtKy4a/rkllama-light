@@ -3,12 +3,12 @@ import ctypes
 # Define the structures from the library
 RKLLM_Handle_t = ctypes.c_void_p
 
-LLMCallState = ctypes.c_int
-LLMCallState.RKLLM_RUN_NORMAL  = 0
-LLMCallState.RKLLM_RUN_WAITING = 1
-LLMCallState.RKLLM_RUN_FINISH  = 2
-LLMCallState.RKLLM_RUN_ERROR   = 3
-LLMCallState.RKLLM_RUN_GET_LAST_HIDDEN_LAYER = 4
+RKLLMCallState = ctypes.c_int
+RKLLMCallState.RKLLM_RUN_NORMAL  = 0
+RKLLMCallState.RKLLM_RUN_WAITING = 1
+RKLLMCallState.RKLLM_RUN_FINISH  = 2
+RKLLMCallState.RKLLM_RUN_ERROR   = 3
+RKLLMCallState.RKLLM_RUN_GET_LAST_HIDDEN_LAYER = 4
 
 RKLLMInputMode = ctypes.c_int
 RKLLMInputMode.RKLLM_INPUT_PROMPT      = 0
@@ -119,3 +119,5 @@ class RKLLMResult(ctypes.Structure):
         ("token_id", ctypes.c_int),
         ("last_hidden_layer", RKLLMResultLastHiddenLayer)
     ]
+
+LLMResultCallback = ctypes.CFUNCTYPE(None, ctypes.POINTER(RKLLMResult), ctypes.c_void_p, ctypes.c_int)
