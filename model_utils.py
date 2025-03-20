@@ -13,8 +13,8 @@ def get_available_models():
     return models_cfg.keys()
 
 def download_model(models_path, model_name):
-    file = open('models_cfg.json')
     ret = True
+    file = open('models_cfg.json')
 
     models_cfg = json.load(file)
 
@@ -37,8 +37,8 @@ def get_model(name):
     return models_cfg[name]
 
 def download_tokenizer(models_path, model_name):
-    file = open('models_cfg.json')
     ret = True
+    file = open('models_cfg.json')
 
     models_cfg = json.load(file)
 
