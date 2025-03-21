@@ -50,7 +50,7 @@ def download_tokenizer(models_path, model_name):
     if not os.path.exists(tokenizer_path):
         try:
             os.mkdir(tokenizer_path)
-            tokenizer = AutoTokenizer.from_pretrained(models_cfg[model_name]["repo_id"], trust_remote_code=True)
+            tokenizer = AutoTokenizer.from_pretrained(models_cfg[model_name]["repo_id"], trust_remote_code=True, cache_dir=models_path)
             tokenizer.save_pretrained(tokenizer_path)
         except:
             ret = False
@@ -66,4 +66,4 @@ def get_tokenizer(models_path, model_name):
 
     tokenizer_path = models_path + "/" + models_cfg[model_name]["repo_id"].replace("/","-")
 
-    return AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
+    return AutoTokenizer.from_pretrained(tokenizer_path, cache_dir=models_path)
