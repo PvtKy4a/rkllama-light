@@ -20,7 +20,7 @@ def rkllm_cb(result, userdata, state):
     else:
         pass
 
-class rkmodel:
+class model:
     def __init__(self, lib_path, models_path, model_name):
         self.__cfg = get_model_cfg(model_name)
         self.__tokenizer = get_tokenizer(models_path, model_name)

@@ -4,17 +4,17 @@ from transformers import AutoTokenizer
 from huggingface_hub import hf_hub_download
 
 def get_available_models():
-    file = open('models_cfg.json')
+    file = open(os.path.expanduser("~") + '/.config/rkllama_light_models.json')
 
     models_cfg = json.load(file)
 
     file.close()
-    
+
     return models_cfg.keys()
 
 def download_model(models_path, model_name):
     ret = True
-    file = open('models_cfg.json')
+    file = open(os.path.expanduser("~") + '/.config/rkllama_light_models.json')
 
     models_cfg = json.load(file)
 
@@ -29,7 +29,7 @@ def download_model(models_path, model_name):
     return ret
 
 def get_model_cfg(model_name):
-    file = open('models_cfg.json')
+    file = open(os.path.expanduser("~") + '/.config/rkllama_light_models.json')
 
     models_cfg = json.load(file)
 
@@ -39,7 +39,7 @@ def get_model_cfg(model_name):
 
 def download_tokenizer(models_path, model_name):
     ret = True
-    file = open('models_cfg.json')
+    file = open(os.path.expanduser("~") + '/.config/rkllama_light_models.json')
 
     models_cfg = json.load(file)
 
@@ -58,7 +58,7 @@ def download_tokenizer(models_path, model_name):
     return ret
 
 def get_tokenizer(models_path, model_name):
-    file = open('models_cfg.json')
+    file = open(os.path.expanduser("~") + '/.config/rkllama_light_models.json')
 
     models_cfg = json.load(file)
 

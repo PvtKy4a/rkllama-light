@@ -1,0 +1,4 @@
+pyinstaller
+transformers
+huggingface_hub
+torch

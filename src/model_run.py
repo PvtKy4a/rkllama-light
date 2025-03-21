@@ -2,7 +2,7 @@ import os
 import sys
 import signal
 import readline
-from rkllm import rkmodel
+import rkllm
 from model_utils import download_tokenizer, download_model
 
 def print_help():
@@ -20,8 +20,9 @@ def print_help():
     sys.stdout.flush()
 
 def model_run(model_name):
-    LIB_PATH = "./lib/librkllmrt.so"
-    MODELS_PATH = "./models"
+    LIB_PATH = "/usr/local/lib/librkllmrt.so"
+    MODELS_PATH = os.path.expanduser("~") + "/.rkllama-light/models"
+
     regenerate = False
     enable_history = True
 
@@ -36,7 +37,7 @@ def model_run(model_name):
         print("\nIncorrect model filename.", flush=True)
         return
 
-    rkllm_model = rkmodel(LIB_PATH, MODELS_PATH, model_name)
+    rkllm_model = rkllm.model(LIB_PATH, MODELS_PATH, model_name)
 
     def abort_handler(sig, frame):
         rkllm_model.set_abort()
