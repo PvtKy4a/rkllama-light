@@ -6,7 +6,7 @@ from model_run import model_run
 from model_list import model_list
 
 def create_models_template(path):
-    cfg_template = {"DeepSeek-R1-Distill-Qwen-1.5B": {
+    cfg_template = {"Qwen2.5-Coder-1.5B-Instruct": {
         "repo_id": "c01zaut/Qwen2.5-Coder-1.5B-Instruct-rk3588-1.1.4",
         "filename": "Qwen2.5-Coder-1.5B-Instruct-rk3588-w8a8_g128-opt-0-hybrid-ratio-0.0.rkllm",
         "system_prompt": "",
