@@ -51,6 +51,7 @@ if [[ ! -d "$WORKSPACE_DIR" ]]; then
     echo "Creating a working directory."
     mkdir $WORKSPACE_DIR
     mkdir $WORKSPACE_DIR/models
+    mkdir $WORKSPACE_DIR/tokenizers
 else
     echo "An existing working directory was found."
 fi

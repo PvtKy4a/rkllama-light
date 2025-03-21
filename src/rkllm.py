@@ -21,9 +21,9 @@ def rkllm_cb(result, userdata, state):
         pass
 
 class model:
-    def __init__(self, lib_path, models_path, model_name):
+    def __init__(self, lib_path, tokenizers_path, models_path, model_name):
         self.__cfg = get_model_cfg(model_name)
-        self.__tokenizer = get_tokenizer(models_path, model_name)
+        self.__tokenizer = get_tokenizer(tokenizers_path, model_name)
         self.__history = []
         self.__response = ""
         self.__abort = False

@@ -22,6 +22,7 @@ def print_help():
 def model_run(model_name):
     LIB_PATH = "/usr/local/lib/librkllmrt.so"
     MODELS_PATH = os.path.expanduser("~") + "/.rkllama-light/models"
+    TOKENIZERS_PATH = os.path.expanduser("~") + "/.rkllama-light/tokenizers"
 
     regenerate = False
     enable_history = True
@@ -29,7 +30,10 @@ def model_run(model_name):
     if not os.path.exists(MODELS_PATH):
         os.mkdir(MODELS_PATH)
 
-    if not download_tokenizer(MODELS_PATH, model_name):
+    if not os.path.exists(TOKENIZERS_PATH):
+        os.mkdir(TOKENIZERS_PATH)
+
+    if not download_tokenizer(TOKENIZERS_PATH, model_name):
         print("\nIncorrect model repo_id", flush=True)
         return
 
@@ -37,7 +41,7 @@ def model_run(model_name):
         print("\nIncorrect model filename.", flush=True)
         return
 
-    rkllm_model = rkllm.model(LIB_PATH, MODELS_PATH, model_name)
+    rkllm_model = rkllm.model(LIB_PATH, TOKENIZERS_PATH, MODELS_PATH, model_name)
 
     def abort_handler(sig, frame):
         rkllm_model.set_abort()
