@@ -34,11 +34,9 @@ def model_run(model_name):
         os.mkdir(TOKENIZERS_PATH)
 
     if not download_tokenizer(TOKENIZERS_PATH, model_name):
-        print("\nIncorrect model repo_id", flush=True)
         return
 
     if not download_model(MODELS_PATH, model_name):
-        print("\nIncorrect model filename.", flush=True)
         return
 
     rkllm_model = rkllm.model(LIB_PATH, TOKENIZERS_PATH, MODELS_PATH, model_name)
@@ -68,34 +66,24 @@ def model_run(model_name):
 
         if user_input == "/bye":
             break
-
-        if user_input == "/?" or user_input == "/help":
+        elif user_input == "/?" or user_input == "/help":
             print_help()
             continue
-
-        if user_input == "/regenerate":
-            if rkllm_model.get_history_len() < 2:
-                print("There have been no requests yet.", flush=True, end="")
-                continue
+        elif user_input == "/regenerate":
             regenerate = True
-
-        if user_input == "/set history":
+        elif user_input == "/set history":
             enable_history = True
             continue
-
-        if user_input == "/unset history":
+        elif user_input == "/unset history":
             enable_history = False
             continue
-
-        if user_input == "/save":
+        elif user_input == "/save":
             print("Not implemented yet.", flush=True, end="")
             continue
-
-        if user_input == "/load":
+        elif user_input == "/load":
             print("Not implemented yet.", flush=True, end="")
             continue
-
-        if user_input == "/clear":
+        elif user_input == "/clear":
             rkllm_model.history_clear()
             continue
 

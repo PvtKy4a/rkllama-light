@@ -76,9 +76,6 @@ class model:
         self.__rkllm_destroy = self.__rkllm_lib.rkllm_destroy
         self.__rkllm_destroy.restype = ctypes.c_int
         self.__rkllm_destroy.argtypes = [rktypes.RKLLM_Handle_t]
-
-    def get_history_len(self):
-        return len(self.__history)
     
     def history_append(self, data):
         self.__history.append(data)
@@ -114,7 +111,11 @@ class model:
             self.__history.append({"role": "system", "content": self.__cfg["system_prompt"]})
 
         if regenerate:
-            self.__history.pop()
+            if len(self.__history) < 2:
+                print("There have been no requests yet.", flush=True, end="")
+                return
+            else:
+                self.__history.pop()
         else:
             self.__history.append({"role": "user", "content": request})
 
