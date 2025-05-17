@@ -38,6 +38,7 @@ class model:
         self.__rkllm_param.max_new_tokens = self.__cfg["max_new_tokens"]
         self.__rkllm_param.skip_special_token = True
         self.__rkllm_param.top_k = self.__cfg["top_k"]
+        self.__rkllm_param.n_keep = -1
         self.__rkllm_param.top_p = self.__cfg["top_p"]
         self.__rkllm_param.temperature = self.__cfg["temperature"]
         self.__rkllm_param.repeat_penalty = self.__cfg["repeat_penalty"]
@@ -51,6 +52,8 @@ class model:
         self.__rkllm_param.img_end = "".encode('utf-8')
         self.__rkllm_param.img_content = "".encode('utf-8')
         self.__rkllm_param.extend_param.base_domain_id = 0
+        self.__rkllm_param.extend_param.enabled_cpus_num = 4
+        self.__rkllm_param.extend_param.enabled_cpus_mask = (1 << 4)|(1 << 5)|(1 << 6)|(1 << 7)
 
         self.__rkllm_handle = rktypes.RKLLM_Handle_t()
         self.__rkllm_init = self.__rkllm_lib.rkllm_init
@@ -61,6 +64,7 @@ class model:
         self.__rkllm_infer_params = rktypes.RKLLMInferParam()
         ctypes.memset(ctypes.byref(self.__rkllm_infer_params), 0, ctypes.sizeof(rktypes.RKLLMInferParam))
         self.__rkllm_infer_params.mode = rktypes.RKLLMInferMode.RKLLM_INFER_GENERATE
+        self.__rkllm_infer_params.keep_history = 0
 
         self.__rkllm_input = rktypes.RKLLMInput()
         self.__rkllm_input.input_mode = rktypes.RKLLMInputMode.RKLLM_INPUT_TOKEN
@@ -76,7 +80,7 @@ class model:
         self.__rkllm_destroy = self.__rkllm_lib.rkllm_destroy
         self.__rkllm_destroy.restype = ctypes.c_int
         self.__rkllm_destroy.argtypes = [rktypes.RKLLM_Handle_t]
-    
+
     def history_append(self, data):
         self.__history.append(data)
 
