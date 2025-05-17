@@ -10,6 +10,8 @@ def print_help():
     print("/clear           Clear chat history")
     print("/set history     Enable chat history (enabled by default)")
     print("/unset history   Disable chat history")
+    print("/set thinking    Enable model thinking")
+    print("/unset thinking  Disable model thinking (disabled by default)")
     print("/save <file>     Save chat history to specified file")
     print("/load <file>     Load chat history from specified file")
     print("/bye             Exit")
@@ -26,6 +28,7 @@ def model_run(model_name):
 
     regenerate = False
     enable_history = True
+    enable_thinking = False
 
     if not os.path.exists(MODELS_PATH):
         os.mkdir(MODELS_PATH)
@@ -77,6 +80,12 @@ def model_run(model_name):
         elif user_input == "/unset history":
             enable_history = False
             continue
+        elif user_input == "/set thinking":
+            enable_thinking = True
+            continue
+        elif user_input == "/unset thinking":
+            enable_thinking = False
+            continue
         elif user_input == "/save":
             print("Not implemented yet.", flush=True, end="")
             continue
@@ -91,7 +100,7 @@ def model_run(model_name):
 
         print("\nAI: ", flush=True, end="")
 
-        rkllm_model.run(user_input, regenerate=regenerate, enable_history=enable_history)
+        rkllm_model.run(user_input, regenerate=regenerate, enable_history=enable_history, enable_thinking=enable_thinking)
 
         regenerate = False
 

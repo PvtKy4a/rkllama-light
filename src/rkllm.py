@@ -107,7 +107,7 @@ class model:
     def __list_to_ctype_array(self, tokens, ctype):
         return (ctype * len(tokens))(*tokens)
 
-    def run(self, request, regenerate=False, enable_history=True):
+    def run(self, request, regenerate=False, enable_history=True, enable_thinking=False):
         if not enable_history:
             self.__history.clear()
 
@@ -123,7 +123,7 @@ class model:
         else:
             self.__history.append({"role": "user", "content": request})
 
-        tokens = self.__tokenizer.apply_chat_template(self.__history, tokenize=True, add_generation_prompt=True)
+        tokens = self.__tokenizer.apply_chat_template(self.__history, tokenize=True, add_generation_prompt=True, enable_thinking=enable_thinking)
 
         self.__response = ""
 

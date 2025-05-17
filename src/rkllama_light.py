@@ -10,7 +10,7 @@ def create_models_template(path):
         "repo_id": "c01zaut/Qwen2.5-Coder-1.5B-Instruct-rk3588-1.1.4",
         "filename": "Qwen2.5-Coder-1.5B-Instruct-rk3588-w8a8_g128-opt-0-hybrid-ratio-0.0.rkllm",
         "system_prompt": "",
-        "max_context_len": 8192,
+        "max_context_len": 4096,
         "max_new_tokens": 2048,
         "top_k": 20,
         "top_p": 0.9,
